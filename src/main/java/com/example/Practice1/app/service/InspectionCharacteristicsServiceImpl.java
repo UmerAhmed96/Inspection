@@ -1,10 +1,12 @@
 package com.example.Practice1.app.service;
 
 import com.example.Practice1.app.service.impl.InspectionCharacteristicsService;
+import com.example.Practice1.beans.TblQmInspectionCharacteristicTypes;
 import com.example.Practice1.beans.TblQmInspectionCharacteristics;
 import com.example.Practice1.dto.RequestDto.InspectionCharacteristicsRequestDto;
 import com.example.Practice1.dto.ResponseDto.InspectionCharacteristicsResponseDto;
 import com.example.Practice1.enums.InspectionStatus;
+import com.example.Practice1.repository.CharacteristicsTypeRepository;
 import com.example.Practice1.repository.InspectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,8 @@ public class InspectionCharacteristicsServiceImpl implements InspectionCharacter
     @Autowired
     InspectionRepository inspectionRepository;
 
-
+    @Autowired
+    CharacteristicsTypeRepository characteristicsTypeRepository;
     @Override
     public ResponseEntity createInspectionCharacteristics(InspectionCharacteristicsRequestDto inspectionDto) throws ParseException {
 
@@ -34,6 +37,7 @@ public class InspectionCharacteristicsServiceImpl implements InspectionCharacter
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             Date date = new Date();
             DateFormat dateTimeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Optional<TblQmInspectionCharacteristicTypes> type = characteristicsTypeRepository.findById(inspectionDto.getInspectionCharacteristicTypeId());
 
 
             TblQmInspectionCharacteristics tblQmInspectionCharacteristicsBean = new TblQmInspectionCharacteristics();
@@ -43,7 +47,7 @@ public class InspectionCharacteristicsServiceImpl implements InspectionCharacter
             tblQmInspectionCharacteristicsBean.setInspectionCharacteristicName(inspectionDto.getInspectionCharacteristicName());
             tblQmInspectionCharacteristicsBean.setInspectionCharacteristicShortText(inspectionDto.getInspectionCharacteristicShortText());
             tblQmInspectionCharacteristicsBean.setInspectionCharacteristicStatus(InspectionStatus.ENABLE.getValue());
-            tblQmInspectionCharacteristicsBean.setInspectionCharacteristicTypeId(inspectionDto.getInspectionCharacteristicTypeId());
+            tblQmInspectionCharacteristicsBean.setInspectionCharacteristicTypes(type.get());
             tblQmInspectionCharacteristicsBean.setPlantId(inspectionDto.getPlantId());
             tblQmInspectionCharacteristicsBean.setCreateDate(dateTimeFormat.parse(dateTimeFormat.format(date)));
 
@@ -82,7 +86,7 @@ public class InspectionCharacteristicsServiceImpl implements InspectionCharacter
             inspectionCharacteristicsResponseDto.setInspectionCharacteristicName(record.get().getInspectionCharacteristicName());
             inspectionCharacteristicsResponseDto.setInspectionCharacteristicShortText(record.get().getInspectionCharacteristicShortText());
             inspectionCharacteristicsResponseDto.setInspectionCharacteristicStatus(record.get().getInspectionCharacteristicStatus());
-            inspectionCharacteristicsResponseDto.setInspectionCharacteristicTypeId(record.get().getInspectionCharacteristicTypeId());
+            inspectionCharacteristicsResponseDto.setInspectionCharacteristicTypeId(record.get().getInspectionCharacteristicTypes());
             inspectionCharacteristicsResponseDto.setPlantId(record.get().getPlantId());
             inspectionCharacteristicsResponseDto.setCreateDate(record.get().getCreateDate());
             inspectionCharacteristicsResponseDto.setUpdateDate(record.get().getUpdateDate());
@@ -103,6 +107,7 @@ public class InspectionCharacteristicsServiceImpl implements InspectionCharacter
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
+            Optional<TblQmInspectionCharacteristicTypes> type = characteristicsTypeRepository.findById(inspectionDto.getInspectionCharacteristicTypeId());
 
             TblQmInspectionCharacteristics tblQmInspectionCharacteristicsBean = new TblQmInspectionCharacteristics();
 
@@ -110,7 +115,7 @@ public class InspectionCharacteristicsServiceImpl implements InspectionCharacter
             tblQmInspectionCharacteristicsBean.setInspectionCharacteristicCode(inspectionDto.getInspectionCharacteristicCode());
             tblQmInspectionCharacteristicsBean.setInspectionCharacteristicName(inspectionDto.getInspectionCharacteristicName());
             tblQmInspectionCharacteristicsBean.setInspectionCharacteristicShortText(inspectionDto.getInspectionCharacteristicShortText());
-            tblQmInspectionCharacteristicsBean.setInspectionCharacteristicTypeId(inspectionDto.getInspectionCharacteristicTypeId());
+            tblQmInspectionCharacteristicsBean.setInspectionCharacteristicTypes(type.get());
             tblQmInspectionCharacteristicsBean.setPlantId(inspectionDto.getPlantId());
 
             if (!StringUtils.isEmpty(inspectionDto.getUpdateDate())) {

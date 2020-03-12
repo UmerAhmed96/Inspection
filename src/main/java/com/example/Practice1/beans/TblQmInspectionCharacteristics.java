@@ -3,7 +3,9 @@ package com.example.Practice1.beans;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_qm_inspection_characteristics")
@@ -31,8 +33,18 @@ public class TblQmInspectionCharacteristics {
     @Column(name = "inspection_characteristic_short_text")
     private String inspectionCharacteristicShortText;
 
-    @Column(name = "inspection_characteristic_type_id")
-    private Integer inspectionCharacteristicTypeId;
+
+    @ManyToOne
+    @JoinColumn(name = "inspection_characteristic_type_id")
+    private TblQmInspectionCharacteristicTypes inspectionCharacteristicTypes;
+
+    public TblQmInspectionCharacteristicTypes getInspectionCharacteristicTypes() {
+        return inspectionCharacteristicTypes;
+    }
+
+    public void setInspectionCharacteristicTypes(TblQmInspectionCharacteristicTypes inspectionCharacteristicTypes) {
+        this.inspectionCharacteristicTypes = inspectionCharacteristicTypes;
+    }
 
     @Column(name="active")
     private Integer active;
@@ -89,14 +101,6 @@ public class TblQmInspectionCharacteristics {
 
     public void setInspectionCharacteristicShortText(String inspectionCharacteristicShortText) {
         this.inspectionCharacteristicShortText = inspectionCharacteristicShortText;
-    }
-
-    public Integer getInspectionCharacteristicTypeId() {
-        return inspectionCharacteristicTypeId;
-    }
-
-    public void setInspectionCharacteristicTypeId(Integer inspectionCharacteristicTypeId) {
-        this.inspectionCharacteristicTypeId = inspectionCharacteristicTypeId;
     }
 
     public Integer getActive() {

@@ -1,6 +1,9 @@
 package com.example.Practice1.dto.ResponseDto;
 
+import com.example.Practice1.beans.TblQmInspectionCharacteristicTypes;
+
 import java.util.Date;
+import java.util.List;
 
 public class InspectionCharacteristicsResponseDto {
 
@@ -8,7 +11,7 @@ public class InspectionCharacteristicsResponseDto {
     private Integer plantId;
     private String inspectionCharacteristicName;
     private String inspectionCharacteristicShortText;
-    private Integer inspectionCharacteristicTypeId;
+    private TblQmInspectionCharacteristicTypes inspectionCharacteristicTypeId;
     private Integer active;
     private Date createDate;
     private Date updateDate;
@@ -54,11 +57,11 @@ public class InspectionCharacteristicsResponseDto {
         this.inspectionCharacteristicShortText = inspectionCharacteristicShortText;
     }
 
-    public Integer getInspectionCharacteristicTypeId() {
+    public TblQmInspectionCharacteristicTypes getInspectionCharacteristicTypeId() {
         return inspectionCharacteristicTypeId;
     }
 
-    public void setInspectionCharacteristicTypeId(Integer inspectionCharacteristicTypeId) {
+    public void setInspectionCharacteristicTypeId(TblQmInspectionCharacteristicTypes inspectionCharacteristicTypeId) {
         this.inspectionCharacteristicTypeId = inspectionCharacteristicTypeId;
     }
 
