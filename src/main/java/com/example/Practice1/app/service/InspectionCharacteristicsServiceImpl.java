@@ -30,6 +30,7 @@ public class InspectionCharacteristicsServiceImpl implements InspectionCharacter
 
     @Autowired
     CharacteristicsTypeRepository characteristicsTypeRepository;
+
     @Override
     public ResponseEntity createInspectionCharacteristics(InspectionCharacteristicsRequestDto inspectionDto) throws ParseException {
 
@@ -37,8 +38,8 @@ public class InspectionCharacteristicsServiceImpl implements InspectionCharacter
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             Date date = new Date();
             DateFormat dateTimeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Optional<TblQmInspectionCharacteristicTypes> type = characteristicsTypeRepository.findById(inspectionDto.getInspectionCharacteristicTypeId());
 
+            Optional<TblQmInspectionCharacteristicTypes> type = characteristicsTypeRepository.findById(inspectionDto.getInspectionCharacteristicTypeId());
 
             TblQmInspectionCharacteristics tblQmInspectionCharacteristicsBean = new TblQmInspectionCharacteristics();
 

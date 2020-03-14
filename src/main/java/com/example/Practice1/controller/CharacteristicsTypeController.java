@@ -45,13 +45,13 @@ public class CharacteristicsTypeController {
         return ResponseEntity.ok().body(responseEntity.getBody());
     }
 
-    @GetMapping(value = "/get/{typeId}")
+    @GetMapping(value = "/get/type/{typeId}")
     public ResponseEntity getRecord(@PathVariable("typeId") int typeId){
         ResponseEntity responseEntity = characteristicsTypeService.getType(typeId);
         return ResponseEntity.ok().body(responseEntity.getBody());
     }
 
-    @DeleteMapping(value = "/delete/{typeId}")
+    @DeleteMapping(value = "/delete/type/{typeId}")
     public ResponseEntity deleteRecord(@PathVariable("typeId") int typeId){
         ResponseEntity responseEntity = characteristicsTypeService.deleteType(typeId);
         return ResponseEntity.ok().body(responseEntity.getBody());

@@ -3,6 +3,7 @@ package com.example.Practice1.app.service;
 import com.example.Practice1.app.service.impl.CharacteristicsTypeService;
 import com.example.Practice1.beans.TblQmInspectionCharacteristicTypes;
 import com.example.Practice1.dto.RequestDto.CharacteristicsTypeRequestDto;
+import com.example.Practice1.dto.ResponseDto.CharacteristicsTypeResponseDto;
 import com.example.Practice1.repository.CharacteristicsTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,12 +52,19 @@ public class CharacteristicsTypeServiceImpl implements CharacteristicsTypeServic
     public ResponseEntity getType(int typeId) {
 
         Optional<TblQmInspectionCharacteristicTypes> type = characteristicsTypeRepository.findById(typeId);
+        CharacteristicsTypeResponseDto responseDto = new CharacteristicsTypeResponseDto();
 
         if (!type.isPresent()){
             return ResponseEntity.badRequest().body(String.format("Does not found Type %s",typeId));
         }
 
-        return ResponseEntity.ok().body(type.get());
+        responseDto.setActive(type.get().getActive());
+        responseDto.setCreateDate(type.get().getCreateDate());
+        responseDto.setInspectionCharacteristicTypeCode(type.get().getInspectionCharacteristicTypeCode());
+        responseDto.setInspectionCharacteristicTypeText(type.get().getInspectionTharacteristicTypeText());
+        responseDto.setUpdateDate(type.get().getUpdateDate());
+
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @Override
